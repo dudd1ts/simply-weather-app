@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row justify-content-md-center">
+        <form class="form-inline mb-3" >
+            <div class="form-group">
+                <input ng-model="cityName" class="form-control mr-2" type="text" placeholder="City...">
+                <button ng-click="$ctrl.getForecastByCityName(cityName)" class="btn btn-primary" type="submit">Show weather</button>
+            </div>
+        </form>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="card weather-card">
+            <div class="card-header">
+                <h2 class="card-title">{{$ctrl.forecast.name}}</h2>
+                <p class="card-subtitle">{{$ctrl.getDate($ctrl.forecast.dt) | date:'fullDate'}}</p>
+            </div>
+            <div class="card-block">
+                <div>
+                    <p class="lead">
+                        <img ng-src="{{$ctrl.getIconImageUrl($ctrl.forecast.weather[0].icon)}}" alt="{{$ctrl.forecast.weather[0].description}}">
+                        {{$ctrl.forecast.main.temp}}°C {{$ctrl.forecast.weather[0].description}}
+                    </p>
+                    <ul class="weater-params">
+                      <li><span class="weater-params__name">Pressure:</span> {{$ctrl.forecast.main.pressure}} mmHg</li>
+                      <li><span class="weater-params__name">Humidity:</span> {{$ctrl.forecast.main.humidity}}%</li>
+                      <li><span class="weater-params__name">Wind:</span> {{$ctrl.forecast.wind.speed}} m/s</li>
+                      <li><span class="weater-params__name">Sunrise:</span> {{$ctrl.getDate($ctrl.forecast.sys.sunrise) | date:'h:mma'}} UTC</li>
+                      <li><span class="weater-params__name">Sunset:</span> {{$ctrl.getDate($ctrl.forecast.sys.sunset) | date:'h:mma'}} UTC</li>
+                    </ul>                                         
+                    
+                </div>
+            </div>
+            <div class="card-footer d-flex">
+                <small class="ml-auto">
+                    as of {{$ctrl.getDate($ctrl.forecast.dt) | date:'h:mma'}} UTC
+                </small>
+            </div>
+        </div>
+    </div>
+
+</div>

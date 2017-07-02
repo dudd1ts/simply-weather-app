@@ -1,0 +1,16 @@
+{
+  "name": "simply-weather",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Simply weather app",
+  "repository": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^0.9.0"
+  },
+  "scripts": {
+    "update-deps": "npm update",
+    "prestart": "npm install",
+    "start": "http-server -a localhost -p 8000 -c-1 ./app"
+  }
+}

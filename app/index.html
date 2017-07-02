@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="weatherApp">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Simply weather app</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/app.css" rel="stylesheet">
+    </head>
+    <body>
+      
+      <div ng-view></div>
+      
+      
+      <script src="libs/angular/angular.min.js"></script>
+      <script src="libs/angular/angular-resource.min.js"></script>
+      <script src="libs/angular/angular-route.min.js"></script>
+      <script src="app.module.js"></script>
+      <script src="app.config.js"></script>
+      <script src="core/core.module.js"></script>
+      <script src="core/forecast/forecast.module.js"></script>
+      <script src="core/forecast/forecast.service.js"></script>
+      <script src="weather-card/weather-card.module.js"></script>
+      <script src="weather-card/weather-card.component.js"></script>
+    </body>
+</html>

@@ -1,0 +1,17 @@
+body {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.weather-card {
+  width: 25rem;
+}
+
+.weater-params {
+  list-style: none;
+  padding-left: 1rem;
+}
+
+.weater-params__name {
+  color: #999;
+}
