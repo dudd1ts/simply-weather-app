@@ -1,11 +1,16 @@
 <div class="container">
     <div class="row justify-content-md-center">
-        <form class="form-inline mb-3" >
+        <form class="form-inline mb-3" novalidate>
             <div class="form-group">
-                <input ng-model="cityName" class="form-control mr-2" type="text" placeholder="City...">
+                <input ng-model="cityName" class="form-control mr-2" type="text" placeholder="City..." required>
                 <button ng-click="$ctrl.getForecastByCityName(cityName)" class="btn btn-primary" type="submit">Show weather</button>
             </div>
         </form>
+    </div>
+    <div class="row justify-content-md-center">
+      <div ng-show="$ctrl.isAlert" class="alert alert-warning" role="alert">
+        {{$ctrl.alertMessage}}
+      </div>
     </div>
     <div class="row justify-content-md-center">
         <div class="card weather-card">

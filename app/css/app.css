@@ -3,6 +3,10 @@ body {
     padding-bottom: 5rem;
 }
 
+input[type="text"].ng-invalid.ng-touched {
+  border-color: #d9534f;
+}
+
 .weather-card {
   width: 25rem;
 }

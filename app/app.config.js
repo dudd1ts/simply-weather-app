@@ -2,7 +2,7 @@
 
 angular.
   module('weatherApp').
-  config(['$locationProvider' ,'$routeProvider', '$qProvider',
+  config(['$locationProvider' ,'$routeProvider',
     function config($locationProvider, $routeProvider) {
       $locationProvider.hashPrefix('!');
 

@@ -9,6 +9,8 @@ angular.
       function WeatherCardController($routeParams, Forecast) {
         var self = this;
         self.defaultCity = 'Moscow';
+        self.alertMassage = '';
+        self.isAlert = false;
         
         self.forecast = Forecast.getForecast({city: self.defaultCity});
         
@@ -17,15 +19,26 @@ angular.
         };
         
         self.getForecastByCityName = function(cityName) {
-           Forecast.getForecast({city: cityName}).$promise.then(function(promise) {
+          if (cityName === undefined || cityName === '') {
+            setAlert('You should enter a city');
+            return;
+          }
+          
+          Forecast.getForecast({city: cityName}).$promise.then(function(promise) {
+            self.isAlert = false;
             self.forecast = promise;
           }, function() {
-            self.forecast = Forecast.getForecast({city: self.defaultCity});
+              setAlert('City not found');
           });
         };
         
         self.getDate = function (date) {
           return new Date(date * 1000);
+        };
+        
+        function setAlert(message) {
+          self.isAlert = true;
+          self.alertMessage = message;
         };
       }
     ]
