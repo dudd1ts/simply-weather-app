@@ -8,11 +8,10 @@ angular.
     controller: ['$routeParams', 'Forecast',
       function WeatherCardController($routeParams, Forecast) {
         var self = this;
-        self.defaultCity = 'Moscow';
+        self.defaultCity = 'Moscow'
         self.alertMassage = '';
         self.isAlert = false;
-        
-        self.forecast = Forecast.getForecast({city: self.defaultCity});
+     
         
         self.getIconImageUrl = function(icon) {
           return (icon ? 'http://openweathermap.org/img/w/' + icon + '.png' : '');
@@ -35,6 +34,12 @@ angular.
         self.getDate = function (date) {
           return new Date(date * 1000);
         };
+        
+        if ($routeParams.cityName === undefined) {
+          self.forecast = Forecast.getForecast({city: self.defaultCity});
+        } else {
+          self.getForecastByCityName($routeParams.cityName);
+        }
         
         function setAlert(message) {
           self.isAlert = true;

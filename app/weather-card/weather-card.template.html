@@ -12,7 +12,7 @@
         {{$ctrl.alertMessage}}
       </div>
     </div>
-    <div class="row justify-content-md-center">
+    <div ng-show="!$ctrl.isAlert" class="row justify-content-md-center">
         <div class="card weather-card">
             <div class="card-header">
                 <h2 class="card-title">{{$ctrl.forecast.name}}</h2>
