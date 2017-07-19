@@ -5,8 +5,8 @@ angular.
   module('weatherCard').
   component('weatherCard', {
     templateUrl: 'weather-card/weather-card.template.html',
-    controller: ['$routeParams', 'Forecast',
-      function WeatherCardController($routeParams, Forecast) {
+    controller: ['$routeParams', '$location', 'Forecast',
+      function WeatherCardController($routeParams, $location, Forecast) {
         var self = this;
         self.defaultCity = 'Moscow';
         self.alertMassage = '';
@@ -23,9 +23,11 @@ angular.
             setAlert('You should enter a city');
             return;
           }
+
           
           Forecast.getForecast({city: cityName}).$promise.then(function(promise) {
             self.isAlert = false;
+            $location.path(cityName);
             self.forecast = promise;
             self.daily = promise.list;
             self.today = promise.list[0];

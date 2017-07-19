@@ -18,6 +18,7 @@
       <div class="col-md-4 mb-3">
         <div class="card weather-card">
             <div class="card-header">
+              {{$ctrl.path}}
                 <h2 class="card-title">{{$ctrl.forecast.city.name}}</h2>
                 <p class="card-subtitle">{{$ctrl.getDate($ctrl.today.dt) | date:'fullDate'}}</p>
             </div>
