@@ -8,9 +8,10 @@ angular.
     controller: ['$routeParams', 'Forecast',
       function WeatherCardController($routeParams, Forecast) {
         var self = this;
-        self.defaultCity = 'Moscow'
+        self.defaultCity = 'Moscow';
         self.alertMassage = '';
         self.isAlert = false;
+        self.orderDays = 'dt';
      
         
         self.getIconImageUrl = function(icon) {
@@ -26,20 +27,22 @@ angular.
           Forecast.getForecast({city: cityName}).$promise.then(function(promise) {
             self.isAlert = false;
             self.forecast = promise;
+            self.daily = promise.list;
+            self.today = promise.list[0];
           }, function() {
               setAlert('City not found');
           });
         };
         
-        self.getDate = function (date) {
-          return new Date(date * 1000);
-        };
-        
         if ($routeParams.cityName === undefined) {
-          self.forecast = Forecast.getForecast({city: self.defaultCity});
+          self.getForecastByCityName(self.defaultCity)
         } else {
           self.getForecastByCityName($routeParams.cityName);
         }
+        
+        self.getDate = function (date) {
+          return new Date(date * 1000);
+        };
         
         function setAlert(message) {
           self.isAlert = true;

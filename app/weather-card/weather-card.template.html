@@ -1,45 +1,67 @@
 <div class="container">
-    <div class="row justify-content-md-center">
-        <form class="form-inline mb-3" novalidate>
-            <div class="form-group">
-                <input ng-model="cityName" class="form-control mr-2" type="text" placeholder="City..." required>
-                <button ng-click="$ctrl.getForecastByCityName(cityName)" class="btn btn-primary" type="submit">Show weather</button>
+    <div class="row">
+      <div class="col">
+        <form class="form-inline mb-3 justify-content-center" novalidate>
+            <div class="form-group d-flex flex-wrap">
+                <input ng-model="cityName" class="form-control m-2" type="text" placeholder="City..." required>
+                <button ng-click="$ctrl.getForecastByCityName(cityName)" class="btn btn-primary mx-auto" type="submit">Show weather</button>
             </div>
         </form>
+      </div>
     </div>
     <div class="row justify-content-md-center">
       <div ng-show="$ctrl.isAlert" class="alert alert-warning" role="alert">
         {{$ctrl.alertMessage}}
       </div>
     </div>
-    <div ng-show="!$ctrl.isAlert" class="row justify-content-md-center">
+    <div ng-show="!$ctrl.isAlert" class="row justify-content-center d-flex">
+      <div class="col-md-4 mb-3">
         <div class="card weather-card">
             <div class="card-header">
-                <h2 class="card-title">{{$ctrl.forecast.name}}</h2>
-                <p class="card-subtitle">{{$ctrl.getDate($ctrl.forecast.dt) | date:'fullDate'}}</p>
+                <h2 class="card-title">{{$ctrl.forecast.city.name}}</h2>
+                <p class="card-subtitle">{{$ctrl.getDate($ctrl.today.dt) | date:'fullDate'}}</p>
             </div>
             <div class="card-block">
                 <div>
                     <p class="lead">
-                        <img ng-src="{{$ctrl.getIconImageUrl($ctrl.forecast.weather[0].icon)}}" alt="{{$ctrl.forecast.weather[0].description}}">
-                        {{$ctrl.forecast.main.temp}}°C {{$ctrl.forecast.weather[0].description}}
+                        <img ng-src="{{$ctrl.getIconImageUrl($ctrl.today.weather[0].icon)}}" alt="{{$ctrl.today.weather[0].description}}">
+                        {{$ctrl.today.temp.day}}°C {{$ctrl.today.weather[0].description}}
                     </p>
                     <ul class="weater-params">
-                      <li><span class="weater-params__name">Pressure:</span> {{$ctrl.forecast.main.pressure}} mmHg</li>
-                      <li><span class="weater-params__name">Humidity:</span> {{$ctrl.forecast.main.humidity}}%</li>
-                      <li><span class="weater-params__name">Wind:</span> {{$ctrl.forecast.wind.speed}} m/s</li>
-                      <li><span class="weater-params__name">Sunrise:</span> {{$ctrl.getDate($ctrl.forecast.sys.sunrise) | date:'h:mma'}} UTC</li>
-                      <li><span class="weater-params__name">Sunset:</span> {{$ctrl.getDate($ctrl.forecast.sys.sunset) | date:'h:mma'}} UTC</li>
+                      <li><span class="weater-params__name">Pressure:</span> {{$ctrl.today.pressure}} hPa</li>
+                      <li><span class="weater-params__name">Humidity:</span> {{$ctrl.today.humidity}}%</li>
+                      <li><span class="weater-params__name">Wind:</span> {{$ctrl.today.speed}} m/s</li>
                     </ul>                                         
                     
                 </div>
             </div>
             <div class="card-footer d-flex">
                 <small class="ml-auto">
-                    as of {{$ctrl.getDate($ctrl.forecast.dt) | date:'h:mma'}} UTC
+                    as of {{$ctrl.getDate($ctrl.today.dt) | date:'h:mma'}} UTC
                 </small>
             </div>
         </div>
+      </div>
+      <div class="col-md-3 flex-md-last">
+        <div class="form-group row no-gutters">
+          <label for="daily-order" class="col-lg-3 col-form-label">Sort by:</label>
+          <div class="col-lg-8 d-flex">
+            <select ng-model="$ctrl.orderDays" class="form-control my-auto" id="daily-order">
+              <option value="dt">Date</option>
+              <option value="temp.day">Temperature</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="list-group">
+          <div class="list-group-item text-nowrap" ng-repeat="day in $ctrl.daily | orderBy:$ctrl.orderDays">
+              <span class="font-weight-bold pr-2">{{$ctrl.getDate(day.dt) | date:'dd MMM'}}</span>
+              <span><img ng-src="{{$ctrl.getIconImageUrl(day.weather[0].icon)}}" alt="{{day.weather[0].description}}" width="20">
+              {{day.temp.day}}°C</span>
+          </div>
+        </div>
+      </div>
     </div>
-
+    
 </div>
